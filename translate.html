@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language & Gallery | GAKWISI Shimo Denis</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE STYLES ===== */
+        :root {
+            --primary: #1a237e;
+            --primary-dark: #0d1556;
+            --primary-light: #534bae;
+            --secondary: #00b8d4;
+            --secondary-dark: #0095a8;
+            --accent: #7c4dff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --text-light: #999999;
+            --bg-light: #f8f9ff;
+            --bg-white: #ffffff;
+            --border: #e0e0e0;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-white);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 4px;
+            background-color: var(--secondary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* ===== HEADER & NAVIGATION ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: var(--transition-normal);
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            background-color: rgba(255, 255, 255, 0.98);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            bottom: 0;
+            left: 0;
+            transition: var(--transition-normal);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ===== LANGUAGE SWITCHER ===== */
+        .language-switcher {
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .current-language {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-primary);
+            transition: all var(--transition-fast);
+            min-width: 80px;
+            justify-content: space-between;
+        }
+
+        .current-language:hover {
+            border-color: var(--secondary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .current-language i {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            transition: transform var(--transition-normal);
+        }
+
+        .language-switcher.active .current-language i {
+            transform: rotate(180deg);
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 180px;
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all var(--transition-normal);
+            z-index: 1000;
+            margin-top: 8px;
+        }
+
+        .language-switcher.active .language-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .language-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .language-option:hover {
+            background: var(--bg-light);
+        }
+
+        .language-option i {
+            width: 16px;
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        .language-option i:not(.fa-check) {
+            opacity: 0;
+        }
+
+        .language-option.active i {
+            opacity: 1;
+        }
+
+        .language-option span {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            height: 60vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.9) 0%, rgba(0, 184, 212, 0.8) 100%), url('https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.3s forwards;
+        }
+
+        /* ===== LANGUAGE MANAGER SECTION ===== */
+        .language-manager-section {
+            background-color: #f8f9fa;
+        }
+
+        .language-manager {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        @media (max-width: 992px) {
+            .language-manager {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .language-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .language-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .language-card h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .language-card h2 i {
+            color: var(--secondary);
+        }
+
+        .language-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .language-option-large {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background: var(--bg-light);
+            border-radius: var(--radius-md);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        }
+
+        .language-option-large:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--border);
+        }
+
+        .language-option-large.active {
+            border-color: var(--secondary);
+            background: rgba(0, 184, 212, 0.05);
+        }
+
+        .language-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .language-flag {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .flag-en {
+            background: linear-gradient(135deg, #012169, #C8102E);
+        }
+
+        .flag-fr {
+            background: linear-gradient(135deg, #002395, #ED2939);
+        }
+
+        .flag-rw {
+            background: linear-gradient(135deg, #00A1DE, #FAD201);
+        }
+
+        .language-details h3 {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .language-details p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .language-status {
+            font-weight: 600;
+            color: var(--secondary);
+            padding: 5px 15px;
+            background: rgba(0, 184, 212, 0.1);
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .apply-language {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            margin-top: 20px;
+        }
+
+        .apply-language:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        }
+
+        .language-preview {
+            background: var(--bg-light);
+            padding: 25px;
+            border-radius: var(--radius-md);
+            margin-top: 30px;
+        }
+
+        .language-preview h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .preview-text {
+            font-style: italic;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            border-left: 3px solid var(--secondary);
+            padding-left: 15px;
+        }
+
+        /* ===== IMAGE GALLERY SECTION ===== */
+        .gallery-section {
+            padding: 80px 0;
+            background: var(--bg-white);
+        }
+
+        .gallery-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .image-slider {
+            display: flex;
+            transition: transform var(--transition-slow);
+            height: 500px;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .slide:hover img {
+            transform: scale(1.05);
+        }
+
+        .slide-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 30px;
+        }
+
+        .slide-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .slide-info p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+        }
+
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .slider-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bg-white);
+            border: 2px solid var(--border);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .slider-btn:hover {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .slider-dots {
+            display: flex;
+            gap: 10px;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--border);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        }
+
+        .slider-dot.active {
+            background: var(--secondary);
+            transform: scale(1.2);
+        }
+
+        .thumbnail-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .thumbnail {
+            height: 100px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: all var(--transition-normal);
+        }
+
+        .thumbnail:hover {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+
+        .thumbnail.active {
+            opacity: 1;
+            border: 3px solid var(--secondary);
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ===== STATISTICS SECTION ===== */
+        .stats-section {
+            background: var(--bg-light);
+            padding: 80px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .stat-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-normal);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .stat-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .footer-logo span {
+            color: var(--secondary);
+        }
+
+        .footer-links h4,
+        .footer-social h4 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-links h4::after,
+        .footer-social h4::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background-color: var(--secondary);
+            bottom: -8px;
+            left: 0;
+        }
+
+        .footer-links ul {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition-normal);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition-normal);
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .language-card {
+                padding: 30px;
+            }
+            
+            .image-slider {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                transform: translateY(-150%);
+                transition: var(--transition-normal);
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .language-switcher {
+                margin: 20px 0;
+                order: -1;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section {
+                padding: 70px 0;
+            }
+            
+            .image-slider {
+                height: 300px;
+            }
+            
+            .thumbnail-gallery {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .language-card {
+                padding: 20px;
+            }
+            
+            .thumbnail-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav class="nav-container">
+                <a href="index.html" class="logo">GSD<span>.</span></a>
+                
+                <!-- Language Switcher -->
+                <div class="language-switcher">
+                    <div class="current-language" id="currentLang">
+                        <span>EN</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="language-dropdown">
+                        <div class="language-option" data-lang="en">
+                            <i class="fas fa-check"></i>
+                            <span>English</span>
+                        </div>
+                        <div class="language-option" data-lang="fr">
+                            <i class="fas"></i>
+                            <span>Français</span>
+                        </div>
+                        <div class="language-option" data-lang="rw">
+                            <i class="fas"></i>
+                            <span>Kinyarwanda</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="translate.html" class="active">LANGUAGE & GALLERY</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                
+                <div class="mobile-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Language Settings & Gallery</h1>
+                <p>Manage your language preferences and explore professional images in multiple languages</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Language Manager Section -->
+    <section class="section language-manager-section">
+        <div class="container">
+            <h2 class="section-title">Language Management</h2>
+            
+            <div class="language-manager">
+                <!-- Language Selection -->
+                <div class="language-card">
+                    <h2><i class="fas fa-language"></i> Select Language</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 30px;">
+                        Choose your preferred language for the entire website. Your selection will be saved automatically.
+                    </p>
+                    
+                    <div class="language-selector">
+                        <div class="language-option-large active" data-lang="en">
+                            <div class="language-info">
+                                <div class="language-flag flag-en">EN</div>
+                                <div class="language-details">
+                                    <h3>English</h3>
+                                    <p>Default language</p>
+                                </div>
+                            </div>
+                            <div class="language-status">Active</div>
+                        </div>
+                        
+                        <div class="language-option-large" data-lang="fr">
+                            <div class="language-info">
+                                <div class="language-flag flag-fr">FR</div>
+                                <div class="language-details">
+                                    <h3>Français</h3>
+                                    <p>French language</p>
+                                </div>
+                            </div>
+                            <div class="language-status">Available</div>
+                        </div>
+                        
+                        <div class="language-option-large" data-lang="rw">
+                            <div class="language-info">
+                                <div class="language-flag flag-rw">RW</div>
+                                <div class="language-details">
+                                    <h3>Kinyarwanda</h3>
+                                    <p>Native language</p>
+                                </div>
+                            </div>
+                            <div class="language-status">Available</div>
+                        </div>
+                    </div>
+                    
+                    <button class="apply-language" id="applyLanguage">
+                        <i class="fas fa-check-circle"></i> Apply Selected Language
+                    </button>
+                    
+                    <div class="language-preview">
+                        <h3>Preview</h3>
+                        <div class="preview-text" id="languagePreview">
+                            Welcome to my professional portfolio. I specialize in creating high-performance web applications and extracting actionable insights from complex data.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics -->
+                <div class="language-card">
+                    <h2><i class="fas fa-chart-bar"></i> Translation Statistics</h2>
+                    <div class="stats-grid" style="margin-top: 20px;">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="stat-number" id="totalWords">2,450</div>
+                            <div class="stat-text">Words Translated</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="stat-number" id="pagesTranslated">4</div>
+                            <div class="stat-text">Pages Translated</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-number" id="activeUsers">1.2k</div>
+                            <div class="stat-text">Active Users</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Gallery Section -->
+    <section class="section gallery-section">
+        <div class="container">
+            <h2 class="section-title">Professional Gallery</h2>
+            
+            <div class="gallery-container">
+                <div class="image-slider" id="imageSlider">
+                    <!-- Slides will be inserted by JavaScript -->
+                </div>
+                
+                <div class="slider-controls">
+                    <button class="slider-btn" id="prevBtn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <div class="slider-dots" id="sliderDots">
+                        <!-- Dots will be inserted by JavaScript -->
+                    </div>
+                    
+                    <button class="slider-btn" id="nextBtn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="thumbnail-gallery" id="thumbnailGallery">
+                <!-- Thumbnails will be inserted by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="section stats-section">
+        <div class="container">
+            <h2 class="section-title">Translation Features</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <div class="stat-number">Real-time</div>
+                    <div class="stat-text">Live translation updates across all pages</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-save"></i>
+                    </div>
+                    <div class="stat-number">Auto-save</div>
+                    <div class="stat-text">Your preferences are saved automatically</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="stat-number">Responsive</div>
+                    <div class="stat-text">Works perfectly on all devices</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">Denis<span>.</span></div>
+                    <p>Full Stack Developer & Certified Data Analyst with expertise in multilingual web solutions and professional image management.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="translate.html">Language & Gallery</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-social">
+                    <h4>Connect With Me</h4>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; <span id="currentYear"></span> GAKWISI Shimo Denis. All Rights Reserved.</p>
+                <p>Full Stack Development • Data Analytics • Business Intelligence</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // ===== TRANSLATION DATA =====
+        const translations = {
+            en: {
+                "heroTitle": "Language Settings & Gallery",
+                "heroSubtitle": "Manage your language preferences and explore professional images in multiple languages",
+                "sectionTitleLang": "Language Management",
+                "sectionTitleGallery": "Professional Gallery",
+                "sectionTitleFeatures": "Translation Features",
+                "selectLanguage": "Select Language",
+                "languageDescription": "Choose your preferred language for the entire website. Your selection will be saved automatically.",
+                "english": "English",
+                "french": "Français",
+                "kinyarwanda": "Kinyarwanda",
+                "defaultLanguage": "Default language",
+                "frenchLanguage": "French language",
+                "nativeLanguage": "Native language",
+                "active": "Active",
+                "available": "Available",
+                "applyLanguage": "Apply Selected Language",
+                "preview": "Preview",
+                "previewText": "Welcome to my professional portfolio. I specialize in creating high-performance web applications and extracting actionable insights from complex data.",
+                "wordsTranslated": "Words Translated",
+                "pagesTranslated": "Pages Translated",
+                "activeUsers": "Active Users",
+                "liveTranslation": "Live translation updates across all pages",
+                "autoSaveDesc": "Your preferences are saved automatically",
+                "responsiveDesc": "Works perfectly on all devices",
+                "slide1Title": "Professional Headshot",
+                "slide1Desc": "Professional portrait showcasing expertise and confidence",
+                "slide2Title": "Working Environment",
+                "slide2Desc": "Modern workspace with advanced development tools",
+                "slide3Title": "Team Collaboration",
+                "slide3Desc": "Working with international teams on complex projects",
+                "slide4Title": "Conference Speaker",
+                "slide4Desc": "Sharing knowledge at tech conferences and meetups",
+                "slide5Title": "Project Presentation",
+                "slide5Desc": "Presenting data analysis results to stakeholders",
+                "slide6Title": "Code Development",
+                "slide6Desc": "Writing clean, efficient code for scalable applications"
+            },
+            fr: {
+                "heroTitle": "Paramètres de Langue & Galerie",
+                "heroSubtitle": "Gérez vos préférences linguistiques et explorez des images professionnelles en plusieurs langues",
+                "sectionTitleLang": "Gestion des Langues",
+                "sectionTitleGallery": "Galerie Professionnelle",
+                "sectionTitleFeatures": "Fonctionnalités de Traduction",
+                "selectLanguage": "Sélectionner la Langue",
+                "languageDescription": "Choisissez votre langue préférée pour l'ensemble du site web. Votre sélection sera enregistrée automatiquement.",
+                "english": "Anglais",
+                "french": "Français",
+                "kinyarwanda": "Kinyarwanda",
+                "defaultLanguage": "Langue par défaut",
+                "frenchLanguage": "Langue française",
+                "nativeLanguage": "Langue maternelle",
+                "active": "Actif",
+                "available": "Disponible",
+                "applyLanguage": "Appliquer la Langue Sélectionnée",
+                "preview": "Aperçu",
+                "previewText": "Bienvenue sur mon portfolio professionnel. Je me spécialise dans la création d'applications web hautes performances et l'extraction d'informations exploitables à partir de données complexes.",
+                "wordsTranslated": "Mots Traduits",
+                "pagesTranslated": "Pages Traduites",
+                "activeUsers": "Utilisateurs Actifs",
+                "liveTranslation": "Mises à jour de traduction en direct sur toutes les pages",
+                "autoSaveDesc": "Vos préférences sont enregistrées automatiquement",
+                "responsiveDesc": "Fonctionne parfaitement sur tous les appareils",
+                "slide1Title": "Photo Professionnelle",
+                "slide1Desc": "Portrait professionnel mettant en valeur l'expertise et la confiance",
+                "slide2Title": "Environnement de Travail",
+                "slide2Desc": "Espace de travail moderne avec des outils de développement avancés",
+                "slide3Title": "Collaboration d'Équipe",
+                "slide3Desc": "Travail avec des équipes internationales sur des projets complexes",
+                "slide4Title": "Conférencier",
+                "slide4Desc": "Partage de connaissances lors de conférences techniques et de rencontres",
+                "slide5Title": "Présentation de Projet",
+                "slide5Desc": "Présentation des résultats d'analyse de données aux parties prenantes",
+                "slide6Title": "Développement de Code",
+                "slide6Desc": "Écriture de code propre et efficace pour des applications évolutives"
+            },
+            rw: {
+                "heroTitle": "Ibyatoranyijwe n'Indimi & Ishusho",
+                "heroSubtitle": "Tegeka ibyo ushaka mu ndimi no gushakisha amashusho y'umwuga mu ndimi nyinshi",
+                "sectionTitleLang": "Gutunganya Indimi",
+                "sectionTitleGallery": "Ishusho ry'Umwuga",
+                "sectionTitleFeatures": "Imikorere yo Guhindura",
+                "selectLanguage": "Hitamo Ururimi",
+                "languageDescription": "Hitamo ururimi ushaka kugirango urubuga rwose rubone. Ibyo wahisemo bizashinzwe mu buryo bwikora.",
+                "english": "Icyongereza",
+                "french": "Igifaransa",
+                "kinyarwanda": "Kinyarwanda",
+                "defaultLanguage": "Ururimi rw'ibanze",
+                "frenchLanguage": "Ururimi rw'igifaransa",
+                "nativeLanguage": "Ururimi rwavukiyeho",
+                "active": "Gikora",
+                "available": "Birabasha",
+                "applyLanguage": "Shyiraho Ururimi Wahisemo",
+                "preview": "Reba Mbere",
+                "previewText": "Murakaza neza mu porifoliyo yanjye y'umwuga. Nshishikajwe no gukora porogaramu z'urubuga zikora neza no gushakisha ubumenyi bukoreshwa mu mibare ishimishije.",
+                "wordsTranslated": "Amagambo Yahinduwe",
+                "pagesTranslated": "Ipage Zahinduwe",
+                "activeUsers": "Abakoresha",
+                "liveTranslation": "Amakuru mashya yo guhindura ku page zose",
+                "autoSaveDesc": "Ibyo wahisemo birahinzwa mu buryo bwikora",
+                "responsiveDesc": "Bikora neza ku buryo bwose",
+                "slide1Title": "Ishusho ry'Umwuga",
+                "slide1Desc": "Ishusho ry'umwuga rigaragaza ubuhanga n'icyizere",
+                "slide2Title": "Aho Nkora",
+                "slide2Desc": "Aho nkora gifite ibikoresho by'umuco",
+                "slide3Title": "Gukorana n'Andi",
+                "slide3Desc": "Gukorana n'andi mu mahanga ku bikorwa bishimishije",
+                "slide4Title": "Uvuga mu Nama",
+                "slide4Desc": "Gusangiza ubumenyi mu nama z'ubuhanga",
+                "slide5Title": "Kugaragaza Ibikorwa",
+                "slide5Desc": "Kugaragaza ibisubizo byo gusobanukirwa imibare ku bantu bahari",
+                "slide6Title": "Gushushanya Porogaramu",
+                "slide6Desc": "Gushushanya porogaramu nziza kandi ikora neza"
+            }
+        };
+
+        // ===== GALLERY IMAGES =====
+        const galleryImages = [
+            {
+                id: 1,
+                url: "me2.jpg",
+                thumbnail: "me2.jpg",
+                titleKey: "slide1Title",
+                descriptionKey: "slide1Desc"
+            },
+            {
+                id: 2,
+                    url: "me3.jpg",
+                thumbnail: "me3.jpg",
+                titleKey: "slide2Title",
+                descriptionKey: "slide2Desc"
+            },
+            {
+                id: 3,
+                url: "me4.jpg",
+                thumbnail: "me4.jpg",
+                titleKey: "slide3Title",
+                descriptionKey: "slide3Desc"
+            },
+            {
+                id: 4,
+                url: "work.jpg",
+                thumbnail: "work.jpg",
+                titleKey: "slide4Title",
+                descriptionKey: "slide4Desc"
+            },
+            {
+                id: 5,
+                url: "Screenshot From 2024-06-20 17-44-28.png",
+                thumbnail: "Screenshot From 2024-06-20 17-44-28.png",
+                titleKey: "slide5Title",
+                descriptionKey: "slide5Desc"
+            },
+            {
+                id: 6,
+                url: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                thumbnail: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                titleKey: "slide6Title",
+                descriptionKey: "slide6Desc"
+            }
+        ];
+
+        // ===== MAIN APPLICATION =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize variables
+            let currentLanguage = localStorage.getItem('preferredLang') || 'en';
+            let currentSlide = 0;
+            let slideInterval;
+            
+            // Set current year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // ===== HEADER FUNCTIONALITY =====
+            
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Mobile menu toggle
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            mobileToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                mobileToggle.innerHTML = navLinks.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                    mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+            
+            // ===== LANGUAGE SYSTEM =====
+            
+            // Initialize language system
+            function initLanguageSystem() {
+                updateLanguage(currentLanguage);
+                setupLanguageSwitcher();
+                setupLanguageOptions();
+            }
+            
+            // Setup language switcher in header
+            function setupLanguageSwitcher() {
+                const languageSwitcher = document.querySelector('.language-switcher');
+                const currentLang = document.getElementById('currentLang');
+                const languageOptions = document.querySelectorAll('.language-option');
+                
+                // Update current language display
+                updateLanguageDisplay(currentLanguage);
+                
+                // Toggle dropdown
+                currentLang.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    languageSwitcher.classList.toggle('active');
+                });
+                
+                // Handle language selection
+                languageOptions.forEach(option => {
+                    option.addEventListener('click', function() {
+                        const lang = this.dataset.lang;
+                        currentLanguage = lang;
+                        
+                        // Update UI
+                        updateLanguage(lang);
+                        
+                        // Save preference
+                        localStorage.setItem('preferredLang', lang);
+                        
+                        // Close dropdown
+                        languageSwitcher.classList.remove('active');
+                        
+                        // Show notification
+                        showNotification('Language updated successfully!', 'success');
+                    });
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!languageSwitcher.contains(e.target)) {
+                        languageSwitcher.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Setup language options on page
+            function setupLanguageOptions() {
+                const languageOptions = document.querySelectorAll('.language-option-large');
+                const applyButton = document.getElementById('applyLanguage');
+                
+                // Set initial active option
+                languageOptions.forEach(option => {
+                    if (option.dataset.lang === currentLanguage) {
+                        option.classList.add('active');
+                    }
+                    
+                    option.addEventListener('click', function() {
+                        // Remove active class from all options
+                        languageOptions.forEach(opt => opt.classList.remove('active'));
+                        
+                        // Add active class to clicked option
+                        this.classList.add('active');
+                        
+                        // Update preview text
+                        updatePreviewText(this.dataset.lang);
+                    });
+                });
+                
+                // Apply language button
+                applyButton.addEventListener('click', function() {
+                    const selectedOption = document.querySelector('.language-option-large.active');
+                    if (selectedOption) {
+                        const lang = selectedOption.dataset.lang;
+                        currentLanguage = lang;
+                        
+                        // Update language
+                        updateLanguage(lang);
+                        
+                        // Save preference
+                        localStorage.setItem('preferredLang', lang);
+                        
+                        // Show success message
+                        showNotification('Language applied successfully!', 'success');
+                    }
+                });
+            }
+            
+            // Update language display
+            function updateLanguageDisplay(lang) {
+                const langCodes = { en: 'EN', fr: 'FR', rw: 'RW' };
+                const currentLangElement = document.getElementById('currentLang');
+                if (currentLangElement) {
+                    currentLangElement.querySelector('span').textContent = langCodes[lang];
+                }
+                
+                // Update language options
+                document.querySelectorAll('.language-option').forEach(option => {
+                    const checkIcon = option.querySelector('.fa-check');
+                    if (option.dataset.lang === lang) {
+                        option.classList.add('active');
+                        if (checkIcon) checkIcon.style.opacity = '1';
+                    } else {
+                        option.classList.remove('active');
+                        if (checkIcon) checkIcon.style.opacity = '0';
+                    }
+                });
+                
+                // Update language options large
+                document.querySelectorAll('.language-option-large').forEach(option => {
+                    if (option.dataset.lang === lang) {
+                        option.classList.add('active');
+                        option.querySelector('.language-status').textContent = translations[lang].active;
+                    } else {
+                        option.classList.remove('active');
+                        option.querySelector('.language-status').textContent = translations[lang].available;
+                    }
+                });
+            }
+            
+            // Update language
+            function updateLanguage(lang) {
+                const translation = translations[lang];
+                if (!translation) return;
+                
+                // Update page content
+                translatePage(translation);
+                
+                // Update language display
+                updateLanguageDisplay(lang);
+                
+                // Update image captions
+                updateImageCaptions(lang);
+                
+                // Update statistics text
+                updateStatisticsText(translation);
+            }
+            
+            // Translate page content
+            function translatePage(translation) {
+                // Update hero section
+                document.querySelector('.hero h1').textContent = translation.heroTitle;
+                document.querySelector('.hero p').textContent = translation.heroSubtitle;
+                
+                // Update section titles
+                document.querySelectorAll('.section-title').forEach((title, index) => {
+                    if (index === 0) title.textContent = translation.sectionTitleLang;
+                    else if (index === 1) title.textContent = translation.sectionTitleGallery;
+                    else if (index === 2) title.textContent = translation.sectionTitleFeatures;
+                });
+                
+                // Update language card
+                const languageCard = document.querySelector('.language-card');
+                if (languageCard) {
+                    languageCard.querySelector('h2').innerHTML = `<i class="fas fa-language"></i> ${translation.selectLanguage}`;
+                    languageCard.querySelector('p').textContent = translation.languageDescription;
+                }
+                
+                // Update language options
+                document.querySelectorAll('.language-details h3').forEach((el, index) => {
+                    if (index === 0) el.textContent = translation.english;
+                    else if (index === 1) el.textContent = translation.french;
+                    else if (index === 2) el.textContent = translation.kinyarwanda;
+                });
+                
+                document.querySelectorAll('.language-details p').forEach((el, index) => {
+                    if (index === 0) el.textContent = translation.defaultLanguage;
+                    else if (index === 1) el.textContent = translation.frenchLanguage;
+                    else if (index === 2) el.textContent = translation.nativeLanguage;
+                });
+                
+                // Update apply button
+                document.getElementById('applyLanguage').innerHTML = `<i class="fas fa-check-circle"></i> ${translation.applyLanguage}`;
+                
+                // Update preview section
+                document.querySelector('.language-preview h3').textContent = translation.preview;
+                
+                // Update preview text
+                updatePreviewText(currentLanguage);
+            }
+            
+            // Update preview text
+            function updatePreviewText(lang) {
+                const previewElement = document.getElementById('languagePreview');
+                if (previewElement) {
+                    previewElement.textContent = translations[lang].previewText;
+                }
+            }
+            
+            // Update statistics text
+            function updateStatisticsText(translation) {
+                document.querySelectorAll('.stat-text').forEach((el, index) => {
+                    if (index === 0) el.textContent = translation.wordsTranslated;
+                    else if (index === 1) el.textContent = translation.pagesTranslated;
+                    else if (index === 2) el.textContent = translation.activeUsers;
+                    else if (index === 3) el.textContent = translation.liveTranslation;
+                    else if (index === 4) el.textContent = translation.autoSaveDesc;
+                    else if (index === 5) el.textContent = translation.responsiveDesc;
+                });
+            }
+            
+            // ===== IMAGE GALLERY =====
+            
+            // Initialize image gallery
+            function initImageGallery() {
+                const imageSlider = document.getElementById('imageSlider');
+                const sliderDots = document.getElementById('sliderDots');
+                const thumbnailGallery = document.getElementById('thumbnailGallery');
+                
+                // Clear existing content
+                imageSlider.innerHTML = '';
+                sliderDots.innerHTML = '';
+                thumbnailGallery.innerHTML = '';
+                
+                // Create slides, dots, and thumbnails
+                galleryImages.forEach((image, index) => {
+                    // Create slide
+                    const slide = document.createElement('div');
+                    slide.className = 'slide';
+                    slide.innerHTML = `
+                        <img src="${image.url}" alt="Gallery Image ${index + 1}" loading="lazy">
+                        <div class="slide-info">
+                            <h3 data-translate="${image.titleKey}">${translations[currentLanguage][image.titleKey]}</h3>
+                            <p data-translate="${image.descriptionKey}">${translations[currentLanguage][image.descriptionKey]}</p>
+                        </div>
+                    `;
+                    imageSlider.appendChild(slide);
+                    
+                    // Create dot
+                    const dot = document.createElement('div');
+                    dot.className = 'slider-dot' + (index === 0 ? ' active' : '');
+                    dot.dataset.index = index;
+                    dot.addEventListener('click', () => goToSlide(index));
+                    sliderDots.appendChild(dot);
+                    
+                    // Create thumbnail
+                    const thumbnail = document.createElement('div');
+                    thumbnail.className = 'thumbnail' + (index === 0 ? ' active' : '');
+                    thumbnail.dataset.index = index;
+                    thumbnail.innerHTML = `<img src="${image.thumbnail}" alt="Thumbnail ${index + 1}" loading="lazy">`;
+                    thumbnail.addEventListener('click', () => goToSlide(index));
+                    thumbnailGallery.appendChild(thumbnail);
+                });
+                
+                // Set up navigation buttons
+                document.getElementById('prevBtn').addEventListener('click', prevSlide);
+                document.getElementById('nextBtn').addEventListener('click', nextSlide);
+                
+                // Start auto-slide
+                startAutoSlide();
+                
+                // Pause auto-slide on hover
+                imageSlider.addEventListener('mouseenter', pauseAutoSlide);
+                imageSlider.addEventListener('mouseleave', startAutoSlide);
+            }
+            
+            // Go to specific slide
+            function goToSlide(index) {
+                currentSlide = index;
+                const slider = document.getElementById('imageSlider');
+                const dots = document.querySelectorAll('.slider-dot');
+                const thumbnails = document.querySelectorAll('.thumbnail');
+                
+                // Update slider position
+                slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+                
+                // Update dots
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentSlide);
+                });
+                
+                // Update thumbnails
+                thumbnails.forEach((thumb, i) => {
+                    thumb.classList.toggle('active', i === currentSlide);
+                });
+                
+                // Reset auto-slide timer
+                resetAutoSlide();
+            }
+            
+            // Next slide
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % galleryImages.length;
+                goToSlide(currentSlide);
+            }
+            
+            // Previous slide
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + galleryImages.length) % galleryImages.length;
+                goToSlide(currentSlide);
+            }
+            
+            // Start auto-slide
+            function startAutoSlide() {
+                if (slideInterval) clearInterval(slideInterval);
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+            
+            // Pause auto-slide
+            function pauseAutoSlide() {
+                if (slideInterval) {
+                    clearInterval(slideInterval);
+                    slideInterval = null;
+                }
+            }
+            
+            // Reset auto-slide
+            function resetAutoSlide() {
+                pauseAutoSlide();
+                startAutoSlide();
+            }
+            
+            // Update image captions
+            function updateImageCaptions(lang) {
+                const translation = translations[lang];
+                document.querySelectorAll('[data-translate]').forEach(element => {
+                    const key = element.dataset.translate;
+                    if (translation[key]) {
+                        element.textContent = translation[key];
+                    }
+                });
+            }
+            
+            // ===== HELPER FUNCTIONS =====
+            
+            // Show notification
+            function showNotification(message, type) {
+                // Remove existing notification
+                const existingNotification = document.querySelector('.notification');
+                if (existingNotification) {
+                    existingNotification.remove();
+                }
+                
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+                notification.innerHTML = `
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                    <span>${message}</span>
+                `;
+                
+                // Add styles
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 100px;
+                    right: 20px;
+                    background: ${type === 'success' ? '#4CAF50' : '#f44336'};
+                    color: white;
+                    padding: 15px 25px;
+                    border-radius: 5px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    z-index: 9999;
+                    animation: slideIn 0.3s ease;
+                `;
+                
+                // Add to document
+                document.body.appendChild(notification);
+                
+                // Remove after 3 seconds
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+            
+            // Animate statistics numbers
+            function animateStatistics() {
+                const totalWords = document.getElementById('totalWords');
+                const pagesTranslated = document.getElementById('pagesTranslated');
+                const activeUsers = document.getElementById('activeUsers');
+                
+                if (totalWords && pagesTranslated && activeUsers) {
+                    // Animate numbers
+                    animateNumber(totalWords, 2450, 2000);
+                    animateNumber(pagesTranslated, 4, 1000);
+                    animateNumber(activeUsers, 1200, 1500);
+                }
+            }
+            
+            // Animate number counting
+            function animateNumber(element, target, duration) {
+                let start = 0;
+                const increment = target / (duration / 16);
+                const timer = setInterval(() => {
+                    start += increment;
+                    if (start >= target) {
+                        element.textContent = target.toLocaleString();
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.floor(start).toLocaleString();
+                    }
+                }, 16);
+            }
+            
+            // ===== INITIALIZE =====
+            
+            initLanguageSystem();
+            initImageGallery();
+            
+            // Start statistics animation after a delay
+            setTimeout(animateStatistics, 500);
+            
+            // Add CSS for animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>
